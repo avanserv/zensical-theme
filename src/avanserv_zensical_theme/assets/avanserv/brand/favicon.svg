@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  avanserv favicon, self-contained dark tile so it reads on any browser-tab colour
+  (no theme dependence). A faint hairline appears only in dark UIs so the tile edge
+  stays visible against near-black chrome. Colours mirror web/kit/src/style.css:
+  tile = color-page token (#050e1a), mark = the outline brand mark in ink-200
+  (#dee7f5, the kit's on-dark mark colour), hairline = the color-hairline channels
+  (ink-400) at a per-surface alpha tuned for a 16px tile.
+
+  Stroke 64 rather than the mark's usual 36 or 44, and it was 88 until 2026-08-27.
+  Stroke width scales with the mark, so at a 16px tile the 288-unit mark box makes a
+  36 stroke about a third of a pixel: it rasterised to a grey smudge with no shape in
+  it, and the answer was to keep adding weight. That answer traded away the wrong half.
+
+  The caps are round, so each one adds half the stroke at both ends of a dash and a
+  notch renders gap minus stroke wide. Against gaps of 107, 97 and 107, stroke 88 left
+  notches of 19, 9 and 19 units: the tab icon kept the silhouette and lost the opening
+  that carries the identity, which is the one thing the kit will not trade. 64 against
+  the re-cut gaps of 116 leaves 52, and still puts the stroke at 0.67px on a 16px tile,
+  1.34 at 32 and 2.01 at 48. The 16px entry is soft and that is the honest floor of an
+  outline mark; 32 is what a browser on any current display actually draws. It reads
+  heavier than the lockups by design; nothing ever sees a tab icon and a deck lockup at
+  the same size.
+
+  That stroke is also why this master's viewBox is its own. Everywhere else the mark
+  is drawn in -26 -26 848.27 848.27, which is the path's 796.27 box plus 26 units of
+  margin, and a stroke straddles the path by HALF its width: 36 and 44 fit inside that
+  margin, 48 fits with two units to spare, 64 needs 32 and overflows it. A nested svg
+  clips to its own viewport, so the overflow is silently cut off and the mark renders
+  with flats where its outer curve should be. Here the viewBox is the INK box instead,
+  the path box grown by half the stroke on each side, so width/height below set the
+  rendered size of the ink itself and no stroke can escape it. Changing the weight means
+  changing that box in the same edit: 796.27 + stroke, offset by half the stroke.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="avanserv">
+  <defs>
+    <style>
+      .edge { stroke: transparent; }
+      @media (prefers-color-scheme: dark) { .edge { stroke: rgba(159,175,198,0.24); } }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="510" height="510" rx="116" fill="#050e1a"/>
+  <rect class="edge" x="2.5" y="2.5" width="507" height="507" rx="114.5" fill="none" stroke-width="3"/>
+  <svg x="112" y="112" width="288" height="288" viewBox="-32 -32 860.27 860.27">
+    <path fill="none" stroke="#dee7f5" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1917 116 123 116 123 116 24 0" d="M 175.11,621.16 C 175.11,621.16 196.08,642.13 211.06,672.14 C 226.04,702.16 253.37,771.65 286.07,786.48 C 318.78,801.31 475.61,801.44 522.18,771.74 C 568.75,742.04 637.27,621.34 677.63,531.3 C 718,441.26 747.59,351.26 767.02,270.01 C 786.45,188.76 795.73,116.26 796.24,75.38 C 796.56,50.04 793.51,36.85 789.18,28.29 C 784.55,19.12 777.13,11.7 767.98,7.08 C 759.41,2.75 746.23,-0.3 720.88,0.02 C 680.01,0.54 607.51,9.81 526.26,29.25 C 445.01,48.68 355.01,78.27 264.97,118.63 C 174.93,158.99 54.22,227.51 24.52,274.09 C -5.18,320.66 -5.04,477.49 9.79,510.19 C 24.61,542.9 94.1,570.22 124.12,585.21 C 154.14,600.19 175.11,621.16 175.11,621.16 Z"/>
+  </svg>
+</svg>

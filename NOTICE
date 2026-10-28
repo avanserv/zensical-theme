@@ -1,0 +1,16 @@
+The MIT License in LICENSE covers the code in this repository. It does not cover the
+following, which keep their own terms.
+
+The avanserv name and mark
+
+    The avanserv name, the avanserv mark and the favicons drawn from it are trademarks of
+    Avanserv SRL. They appear in src/avanserv_zensical_theme/assets/avanserv/brand/favicon.*,
+    src/avanserv_zensical_theme/assets/avanserv/brand/apple-touch-icon.png and the mark
+    partials src/avanserv_zensical_theme/partials/av-mark*.html. No licence to them is
+    granted. Use them only to identify documentation published by Avanserv SRL.
+
+Spline Sans and Spline Sans Mono
+
+    The font files in src/avanserv_zensical_theme/assets/avanserv/brand/fonts/ are licensed
+    under the SIL Open Font License 1.1. The licence texts travel with them in the same
+    directory.

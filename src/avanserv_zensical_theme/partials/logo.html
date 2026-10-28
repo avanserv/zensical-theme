@@ -1,0 +1,9 @@
+{#-
+  The brand mark replaces Material's icon logo. It is drawn inline with currentColor so it
+  follows the colour scheme; a consumer's theme.logo image still wins when set.
+-#}
+{% if config.theme.logo %}
+  <img src="{{ config.theme.logo | url }}" alt="{{ config.site_name }}">
+{% else %}
+  {% include "partials/av-mark.html" %}
+{% endif %}

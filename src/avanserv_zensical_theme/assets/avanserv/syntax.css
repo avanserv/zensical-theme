@@ -1,0 +1,102 @@
+/*
+ * Code token colours, after the avanserv VS Code theme.
+ * Syntax-Source: avanserv/vsx-avanserv-theme@433faca, themes/AvanservDark.json
+ *
+ * Slate takes the vsx colours as they are, except comments and punctuation: vsx #63697d is
+ * 3.2:1 on the dark code ground, so they use --color-content-faint (ink-500). vsx has no light
+ * theme; the light values keep each hue and lower its OKLCH lightness until it holds 4.6:1 on
+ * the card under a highlighted line. tests/test_syntax.py compares the slate values with vsx.
+ *
+ * A highlighted line is a neutral band, not the accent wash, which drops dark keywords below AA.
+ * In slate the band is recessed rather than lifted: any lighter band takes comments under 4.5:1.
+ */
+
+:root,
+[data-md-color-scheme] {
+  --av-syntax-keyword: #9c496a;
+  --av-syntax-string: #556c38;
+  --av-syntax-number: #5f6953;
+  --av-syntax-function: #006f79;
+  --av-syntax-error: #a3494a;
+  --av-syntax-variable: var(--color-content);
+  --av-syntax-comment: var(--color-content-faint);
+  --av-syntax-band: var(--color-control);
+}
+
+[data-md-color-scheme="slate"] {
+  --av-syntax-keyword: #c76f90;
+  --av-syntax-string: #8fa872;
+  --av-syntax-number: #c1ccb4;
+  --av-syntax-function: #36b8c2;
+  --av-syntax-error: #c96b6b;
+  --av-syntax-band: var(--color-card-header);
+}
+
+/* Material's own rules read these, so anything the explicit rules below miss still agrees. */
+:root,
+[data-md-color-scheme] {
+  --md-code-hl-keyword-color: var(--av-syntax-keyword);
+  --md-code-hl-operator-color: var(--av-syntax-keyword);
+  --md-code-hl-string-color: var(--av-syntax-string);
+  --md-code-hl-special-color: var(--av-syntax-number);
+  --md-code-hl-number-color: var(--av-syntax-number);
+  --md-code-hl-constant-color: var(--av-syntax-number);
+  --md-code-hl-function-color: var(--av-syntax-function);
+  --md-code-hl-name-color: var(--av-syntax-variable);
+  --md-code-hl-variable-color: var(--av-syntax-variable);
+  --md-code-hl-comment-color: var(--av-syntax-comment);
+  --md-code-hl-punctuation-color: var(--av-syntax-comment);
+  --md-code-hl-generic-color: var(--av-syntax-comment);
+  --md-code-hl-color: var(--av-syntax-band);
+  --md-code-hl-color--light: var(--av-syntax-band);
+}
+
+/* Pygments classes, grouped the way vsx groups the TextMate scopes they come from. */
+
+.highlight :is(.k, .kd, .kn, .kp, .kr, .kt, .o, .ow, .nt) {
+  color: var(--av-syntax-keyword);
+}
+
+.highlight :is(.s, .s1, .s2, .sa, .sb, .sc, .sd, .dl, .sh, .si, .sx, .gi) {
+  color: var(--av-syntax-string);
+}
+
+.highlight :is(.m, .mi, .mf, .mh, .mo, .mb, .il, .sr, .ss, .se) {
+  color: var(--av-syntax-number);
+}
+
+.highlight .kc {
+  color: var(--av-syntax-number);
+  font-style: italic;
+}
+
+.highlight :is(.nf, .fm, .nc, .ne, .nb) {
+  color: var(--av-syntax-function);
+}
+
+.highlight .nd {
+  color: var(--av-syntax-function);
+  font-style: italic;
+}
+
+.highlight :is(.n, .nv, .vc, .vg, .vi, .na, .nn, .no) {
+  color: var(--av-syntax-variable);
+}
+
+.highlight .bp {
+  color: var(--av-syntax-variable);
+  font-style: italic;
+}
+
+.highlight :is(.c, .c1, .ch, .cm, .cs, .cpf) {
+  color: var(--av-syntax-comment);
+  font-style: italic;
+}
+
+.highlight :is(.p, .gp, .go) {
+  color: var(--av-syntax-comment);
+}
+
+.highlight :is(.err, .gd, .gr, .gt) {
+  color: var(--av-syntax-error);
+}

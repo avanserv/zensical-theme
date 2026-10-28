@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions: {}
+
+jobs:
+  check:
+    name: Check (zensical ${{ matrix.zensical }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor consumers pin, and whatever the lockfile resolves.
+        zensical: ["0.0.68", "locked"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          enable-cache: false
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Pin zensical
+        if: matrix.zensical != 'locked'
+        run: uv pip install "zensical==${{ matrix.zensical }}"
+
+      - name: Lint
+        run: uv run --no-sync ruff check && uv run --no-sync ruff format --check
+
+      - name: Test
+        run: uv run --no-sync pytest
+
+      - name: Build the site
+        run: uv run --no-sync zensical build --clean --strict
+
+  brand:
+    name: Vendored brand matches the pin
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      HAS_KEY: ${{ secrets.BRAND_DEPLOY_KEY != '' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Read the pin
+        id: pin
+        run: echo "version=$(cat BRAND_VERSION)" >> "$GITHUB_OUTPUT"
+
+      # avanserv/brand is private. Without the read-only deploy key the check below reports a
+      # skip as a warning instead of passing quietly.
+      - name: Checkout avanserv/brand
+        if: env.HAS_KEY == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: avanserv/brand
+          ref: ${{ steps.pin.outputs.version }}
+          ssh-key: ${{ secrets.BRAND_DEPLOY_KEY }}
+          fetch-tags: true
+          path: .brand
+          persist-credentials: false
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          enable-cache: false
+
+      - name: Check
+        run: uv run --no-project python tools/sync_brand.py --check
+        env:
+          BRAND_DIR: .brand

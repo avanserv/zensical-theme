@@ -1,0 +1,732 @@
+/*
+ * avanserv theme for Zensical (modern variant).
+ *
+ * Colours, type, radii and shadows come only from tokens.css, which is generated from
+ * avanserv/brand; this file maps them onto Material's --md-* properties and restyles the
+ * components after the @avanserv/kit recipes. tests/test_tokens.py rejects colour literals here.
+ *
+ * Material sets html to 125%, so 1rem is 20px here and 16px in the brand. Brand sizes are
+ * therefore scaled by --av-rem rather than used as they are.
+ */
+
+:root {
+  --av-rem: 0.8;
+  --av-radius-control: calc(var(--radius-control) * var(--av-rem));
+  --av-radius-card: calc(var(--radius-card) * var(--av-rem));
+}
+
+/* Role mapping. [data-md-color-scheme] sits on <body>, where tokens.css redefines the brand
+   roles for slate, so every var() below resolves per scheme. */
+:root,
+[data-md-color-scheme] {
+  --md-text-font-family: var(--font-sans);
+  --md-code-font-family: var(--font-mono);
+
+  --md-default-bg-color: var(--color-canvas);
+  --md-default-bg-color--light: color-mix(in srgb, var(--color-card) 80%, transparent);
+  --md-default-bg-color--lighter: var(--color-control);
+  --md-default-bg-color--lightest: var(--color-control-hover);
+  --md-default-fg-color: var(--color-content);
+  --md-default-fg-color--light: var(--color-content-muted);
+  --md-default-fg-color--lighter: var(--color-content-faint);
+  --md-default-fg-color--lightest: var(--color-line);
+
+  --md-primary-fg-color: var(--color-accent);
+  --md-primary-fg-color--light: var(--color-accent);
+  --md-primary-fg-color--dark: var(--color-accent-dark);
+  --md-primary-bg-color: var(--color-on-dark-strong);
+  --md-primary-bg-color--light: var(--color-on-dark);
+
+  --md-accent-fg-color: var(--color-link-hover);
+  --md-accent-fg-color--transparent: var(--color-accent-wash);
+  --md-accent-bg-color: var(--color-on-solid);
+  --md-accent-bg-color--light: var(--color-on-solid);
+
+  --md-typeset-color: var(--color-content);
+  --md-typeset-a-color: var(--color-link);
+  --md-typeset-table-color: var(--color-line);
+  --md-typeset-table-color--light: var(--color-line-subtle);
+  --md-typeset-mark-color: color-mix(in srgb, var(--color-warning) 22%, transparent);
+  --md-typeset-del-color: color-mix(in srgb, var(--color-danger) 18%, transparent);
+  --md-typeset-ins-color: color-mix(in srgb, var(--color-success) 18%, transparent);
+  --md-typeset-kbd-color: var(--color-card);
+  --md-typeset-kbd-accent-color: var(--color-card);
+  --md-typeset-kbd-border-color: var(--color-line-strong);
+
+  --md-admonition-fg-color: var(--color-content);
+  --md-admonition-bg-color: var(--color-card);
+  --md-warning-fg-color: var(--color-content);
+  --md-warning-bg-color: color-mix(in srgb, var(--color-warning) 14%, var(--color-card));
+  --md-footer-fg-color: var(--color-content-muted);
+  --md-footer-fg-color--light: var(--color-content-faint);
+  --md-footer-fg-color--lighter: var(--color-content-faint);
+  --md-footer-bg-color: var(--color-canvas);
+  --md-footer-bg-color--dark: var(--color-canvas);
+
+  --md-shadow-z1: var(--shadow-flat);
+  --md-shadow-z2: var(--shadow-raised);
+  --md-shadow-z3: var(--shadow-popover);
+
+  --md-code-fg-color: var(--color-content);
+  /* Blocks sit on the card: on line-subtle, the faint comments and warning numbers miss AA. */
+  --md-code-bg-color: var(--color-card);
+  --md-code-bg-color--light: var(--color-card-header);
+  --md-code-bg-color--lighter: var(--color-line-subtle);
+
+  /* Zensical's search dialog lives in a shadow root and inherits these as channel triplets. */
+  --color-foreground: var(--color-ink-900-rgb);
+  --color-background: var(--color-ink-50-rgb);
+  --color-background-subtle: var(--color-ink-200-rgb);
+  --color-backdrop: var(--color-ink-100-rgb);
+
+  /* Admonition tone; the type selectors below reassign it. */
+  --av-tone: var(--color-info);
+}
+
+/* Dark surfaces carry depth on their borders, so resting shadows go and floaters get one deep
+   ambient shadow, as in the kit. An empty shadow rather than none, because these sit inside
+   comma-separated box-shadow lists where none is invalid. */
+[data-md-color-scheme="slate"] {
+  --shadow-flat: 0 0 0 0 transparent;
+  --shadow-raised: 0 0 0 0 transparent;
+  --shadow-overlay: 0 16px 40px -12px rgb(0 0 0 / 0.7);
+  --shadow-popover: 0 16px 40px -12px rgb(0 0 0 / 0.7);
+
+  --color-foreground: var(--color-ink-100-rgb);
+  --color-background: var(--color-ink-900-rgb);
+  --color-background-subtle: var(--color-ink-800-rgb);
+  --color-backdrop: var(--color-ink-950-rgb);
+}
+
+body {
+  background-color: var(--color-canvas);
+  font-feature-settings: normal;
+}
+
+/* Type */
+
+.md-typeset {
+  font-size: calc(var(--text-body) * var(--av-rem));
+  line-height: var(--text-body--line-height);
+  letter-spacing: normal;
+  text-wrap: pretty;
+}
+
+.md-typeset strong {
+  font-weight: 600;
+}
+
+.md-typeset :is(h1, h2, h3, h4) {
+  color: var(--color-content);
+  text-wrap: balance;
+}
+
+.md-typeset h1 {
+  font-size: calc(var(--text-h1) * var(--av-rem));
+  line-height: var(--text-h1--line-height);
+  font-weight: var(--text-h1--font-weight);
+  letter-spacing: var(--text-h1--letter-spacing);
+  margin-bottom: 1em;
+}
+
+.md-typeset h2 {
+  font-size: calc(var(--text-h2) * var(--av-rem));
+  line-height: var(--text-h2--line-height);
+  font-weight: var(--text-h2--font-weight);
+  letter-spacing: var(--text-h2--letter-spacing);
+  margin-top: 2em;
+}
+
+.md-typeset h3 {
+  font-size: calc(var(--text-h3) * var(--av-rem));
+  line-height: var(--text-h3--line-height);
+  font-weight: var(--text-h3--font-weight);
+  letter-spacing: normal;
+}
+
+.md-typeset h4 {
+  font-size: calc(var(--text-title) * var(--av-rem));
+  line-height: var(--text-title--line-height);
+  font-weight: var(--text-title--font-weight);
+  letter-spacing: normal;
+}
+
+.md-typeset .headerlink {
+  color: var(--color-content-faint);
+}
+
+/* Links: underlined at rest, as the kit's link-inline. */
+
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.md-typeset a:is(:hover, :focus) {
+  color: var(--color-link-hover);
+}
+
+.md-typeset :is(.headerlink, .md-button, .footnote-ref, .footnote-backref),
+.md-typeset :is(h1, h2, h3, h4, h5, h6) a,
+.md-typeset .highlight a {
+  text-decoration: none;
+}
+
+/* Focus is neutral and solid on every surface; the accent is not a focus colour. */
+
+:focus-visible,
+.md-typeset :focus-visible,
+.focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* Header: the kit's app bar, card at 80% over a blur with a hairline beneath. */
+
+.md-header {
+  background-color: color-mix(in srgb, var(--color-card) 80%, transparent);
+  color: var(--color-content);
+  border-bottom: 1px solid var(--color-line);
+  box-shadow: none;
+}
+
+.md-header--shadow {
+  box-shadow: none;
+}
+
+.md-header__button.md-logo {
+  color: var(--color-mark);
+}
+
+.md-header__button.md-logo :is(img, svg) {
+  height: 1.3rem;
+}
+
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.md-search__form {
+  background-color: var(--color-control);
+  border-radius: var(--av-radius-control);
+  box-shadow: inset 0 0 0 1px var(--color-line-subtle);
+}
+
+.md-search__input::placeholder {
+  color: var(--color-content-placeholder);
+}
+
+/* Navigation: the kit's sidebar item. The selected page is a neutral fill, never olive. */
+
+.md-nav__link {
+  border-radius: var(--av-radius-control);
+  color: var(--color-content-muted);
+  transition:
+    color var(--transition-duration-fast) var(--ease-standard),
+    background-color var(--transition-duration-fast) var(--ease-standard);
+}
+
+.md-nav--primary .md-nav__link:is([href], [for]):hover {
+  color: var(--color-content);
+  background-color: var(--color-control-hover);
+}
+
+.md-nav--primary .md-nav__item .md-nav__link--active,
+.md-nav--primary .md-nav__item .md-nav__link--active code {
+  color: var(--color-content);
+  background-color: var(--color-control-selected);
+  font-weight: 600;
+}
+
+/* Table of contents: the kit's TableOfContents, an overline title over a ruled list whose
+   active entry takes the accent and a 2px bar. */
+
+.md-nav--secondary .md-nav__title {
+  font-family: var(--font-mono);
+  font-size: calc(var(--text-caption) * var(--av-rem));
+  font-weight: var(--text-caption--font-weight);
+  letter-spacing: var(--tracking-overline);
+  text-transform: uppercase;
+  color: var(--color-content-faint);
+}
+
+.md-nav--secondary > .md-nav__list {
+  margin-left: 0.8rem;
+  border-left: 1px solid var(--color-line);
+}
+
+.md-nav--secondary .md-nav__link {
+  margin-left: -1px;
+  margin-right: 0;
+  border-radius: 0;
+  border-left: 2px solid transparent;
+}
+
+.md-nav--secondary .md-nav__link[href]:is(:hover, :focus) {
+  color: var(--color-content);
+}
+
+.md-nav--secondary .md-nav__link--active,
+.md-nav--secondary .md-nav__link--active:is(:hover, :focus) {
+  color: var(--color-link);
+  border-left-color: currentColor;
+  font-weight: 500;
+}
+
+/* Admonitions and details: the kit's Alert. A card with a 6% tone wash, a tone ring at 30%
+   and a 4px tone bar on the leading edge, drawn as inset shadows so the radius clips them.
+   [class] lifts the rule over Material's per-type background colours. */
+
+.md-typeset :is(.admonition, details)[class] {
+  background-color: var(--color-card);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--av-tone) 6%, transparent),
+    color-mix(in srgb, var(--av-tone) 6%, transparent)
+  );
+  border: 0;
+  border-radius: var(--av-radius-card);
+  box-shadow:
+    inset 4px 0 0 var(--av-tone),
+    inset 0 0 0 1px color-mix(in srgb, var(--av-tone) 30%, transparent),
+    var(--shadow-flat);
+  padding-left: calc(0.8rem + 4px);
+  font-size: calc(var(--text-body-sm) * var(--av-rem));
+  line-height: var(--text-body-sm--line-height);
+}
+
+.md-typeset :is(.admonition-title, summary) {
+  font-weight: 600;
+  color: var(--color-content);
+}
+
+.md-typeset :is(.admonition, details) > :is(.admonition-title, summary)::before {
+  background-color: var(--av-tone);
+}
+
+.md-typeset :is(.admonition, details) > summary::after {
+  color: var(--color-content-muted);
+}
+
+.md-typeset :is(.admonition, details):is(.note, .abstract, .summary, .tldr, .info, .todo) {
+  --av-tone: var(--color-info);
+}
+
+.md-typeset :is(.admonition, details):is(.tip, .hint, .important, .success, .check, .done) {
+  --av-tone: var(--color-success);
+}
+
+.md-typeset
+  :is(.admonition, details):is(.warning, .caution, .attention, .question, .help, .faq) {
+  --av-tone: var(--color-warning);
+}
+
+.md-typeset
+  :is(.admonition, details):is(.danger, .error, .failure, .fail, .missing, .bug) {
+  --av-tone: var(--color-danger);
+}
+
+.md-typeset :is(.admonition, details):is(.example, .quote, .cite) {
+  --av-tone: var(--color-content-faint);
+}
+
+/* Code */
+
+.md-typeset code {
+  background-color: var(--color-line-subtle);
+  border-radius: 0.25em;
+  font-size: 0.875em;
+}
+
+.md-typeset pre > code {
+  background-color: var(--color-card);
+  border-radius: var(--av-radius-card);
+  box-shadow: inset 0 0 0 1px var(--color-line);
+}
+
+.md-typeset .highlight span.filename {
+  background-color: var(--color-card-header);
+  color: var(--color-content-muted);
+  font-weight: 600;
+  border: 1px solid var(--color-line);
+  border-bottom: 0;
+  border-radius: var(--av-radius-card) var(--av-radius-card) 0 0;
+}
+
+.md-typeset .highlight span.filename + pre > code {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* With line numbers the gutter sits in a table beside the code, so the table carries the frame
+   and the title and code inside it drop their own. Nothing clips: annotation tooltips render
+   inside the code and must overflow it, so the title rounds its own top corners instead. */
+
+.md-typeset .highlighttable {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-card);
+}
+
+.md-typeset .highlighttable span.filename {
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: calc(var(--av-radius-card) - 1px) calc(var(--av-radius-card) - 1px) 0 0;
+}
+
+.md-typeset .highlighttable pre > code {
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.md-typeset .highlighttable .linenos,
+.md-typeset .highlight [data-linenos]::before {
+  color: var(--color-content-faint);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.md-typeset .highlight .hll {
+  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+
+/* The copy button: inset from the block's rounded corner. Its chip is the code ground at rest,
+   invisible on short lines and masking the text of long ones; hover layers the control fill
+   over it, since that token is translucent in slate. */
+
+.md-code__nav,
+:hover > .md-code__nav {
+  top: 0.5em;
+  right: 0.5em;
+  padding: 0.15rem;
+  background-color: var(--color-card);
+  border-radius: var(--av-radius-control);
+  /* Fades text into the chip's left side. Horizontal only: a spread would cover the block's
+     rounded corner. */
+  box-shadow: -0.25em 0 0.25em 0 var(--color-card);
+}
+
+/* Masks the gap between chip and right edge. A square strip, since a shifted copy of the
+   rounded chip leaves glyph slivers at its corners. */
+.md-code__nav::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: calc(0.5em - 1px);
+  content: "";
+  background-color: var(--color-card);
+}
+
+/* Inside a tab or a line-number table the code has no ring of its own to leave room for. */
+:is(.tabbed-block, .highlighttable) .md-code__nav::after {
+  width: 0.5em;
+}
+
+.md-code__nav:hover {
+  background-image: linear-gradient(var(--color-control-hover), var(--color-control-hover));
+}
+
+.md-code__button,
+.md-clipboard {
+  color: var(--color-content-faint);
+}
+
+:hover > * > .md-code__button,
+.md-code__button:hover,
+:hover > .md-clipboard {
+  color: var(--color-content);
+}
+
+.md-typeset kbd {
+  font-family: var(--font-mono);
+  color: var(--color-content);
+  border-radius: 0.25em;
+  box-shadow:
+    0 0 0 1px var(--color-line-strong),
+    0 2px 0 var(--color-line-strong);
+}
+
+/* Tables: the kit's surface-card, with a header tray. */
+
+.md-typeset table:not([class]) {
+  font-size: calc(var(--text-body-sm) * var(--av-rem));
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-card);
+  box-shadow: var(--shadow-flat);
+  font-variant-numeric: tabular-nums;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--color-card-header);
+  color: var(--color-content-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-line-subtle);
+}
+
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--color-line-subtle);
+}
+
+.md-typeset table:not([class]) tr:first-child td {
+  border-top: 0;
+}
+
+/* Content tabs: one card, its label strip a header tray like a code block's title, with the
+   kit's 3px accent indicator. Code inside a tab bleeds to the card's edges. */
+
+.md-typeset .tabbed-set {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-card);
+  box-shadow: var(--shadow-flat);
+}
+
+/* No overflow clipping on the set, for the same tooltip reason as the line-number table. */
+.md-typeset .tabbed-labels {
+  background-color: var(--color-card-header);
+  border-radius: calc(var(--av-radius-card) - 1px) calc(var(--av-radius-card) - 1px) 0 0;
+  box-shadow: inset 0 -1px 0 var(--color-line);
+}
+
+.md-typeset .tabbed-block {
+  padding: 0 1em;
+}
+
+.md-typeset .tabbed-block > .highlight {
+  margin-left: -1em;
+  margin-right: -1em;
+}
+
+.md-typeset .tabbed-block > .highlight:first-child,
+.md-typeset .tabbed-block > .highlight:first-child pre {
+  margin-top: 0;
+}
+
+.md-typeset .tabbed-block > .highlight:last-child,
+.md-typeset .tabbed-block > .highlight:last-child pre {
+  margin-bottom: 0;
+}
+
+.md-typeset .tabbed-block > .highlight pre > code {
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.md-typeset .tabbed-labels > label {
+  color: var(--color-content-muted);
+  font-weight: 500;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--color-content);
+}
+
+.js .md-typeset .tabbed-labels::before {
+  height: 3px;
+  background: var(--color-accent);
+}
+
+/* Buttons: the kit's secondary and primary. The primary is the one sanctioned olive fill. */
+
+.md-typeset .md-button {
+  padding: 0.5em 1.1em;
+  font-weight: 500;
+  color: var(--color-content);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-control);
+  box-shadow: var(--shadow-flat);
+}
+
+.md-typeset .md-button:is(:hover, :focus) {
+  color: var(--color-content);
+  background-color: var(--color-card-header);
+}
+
+.md-typeset .md-button--primary {
+  color: var(--color-on-dark-strong);
+  background-color: var(--color-accent);
+  border-color: transparent;
+}
+
+.md-typeset .md-button--primary:is(:hover, :focus) {
+  color: var(--color-on-dark-strong);
+  background-color: var(--color-accent-dark);
+}
+
+/* Prose furniture */
+
+.md-typeset blockquote {
+  color: var(--color-content-muted);
+  border-left: 3px solid var(--color-content-faint);
+}
+
+.md-typeset hr {
+  border-bottom-color: var(--color-line);
+}
+
+.md-typeset .task-list-indicator::before {
+  background-color: var(--color-line-strong);
+}
+
+.md-typeset [type="checkbox"]:checked + .task-list-indicator::before {
+  background-color: var(--color-success);
+}
+
+/* Scrollbars use the brand thumb everywhere; Material turns them olive on hover. */
+
+.md-typeset pre > code,
+.md-sidebar__scrollwrap,
+.md-tooltip2__inner {
+  scrollbar-color: var(--sb-thumb) transparent;
+}
+
+.md-typeset pre > code:hover,
+.md-sidebar__scrollwrap:is(:hover, :focus-within),
+.md-tooltip2__inner:hover {
+  scrollbar-color: var(--sb-thumb-hover) transparent;
+}
+
+.md-typeset pre > code::-webkit-scrollbar-thumb,
+.md-sidebar__scrollwrap:is(:hover, :focus-within)::-webkit-scrollbar-thumb,
+.md-tooltip2__inner::-webkit-scrollbar-thumb {
+  background-color: var(--sb-thumb);
+}
+
+.md-typeset pre > code::-webkit-scrollbar-thumb:hover,
+.md-sidebar__scrollwrap:is(:hover, :focus-within)::-webkit-scrollbar-thumb:hover,
+.md-tooltip2__inner::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sb-thumb-hover);
+}
+
+/* Tooltips and code annotations: a raised card, not the page colour Material gives them. */
+
+.md-tooltip,
+.md-tooltip2__inner {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-card);
+  box-shadow: var(--shadow-popover);
+}
+
+.md-tooltip2--top::before {
+  border-top-color: var(--color-card);
+}
+
+.md-tooltip2--bottom::before {
+  border-bottom-color: var(--color-card);
+}
+
+.md-annotation__index::before {
+  background-color: var(--color-card);
+}
+
+/* The copy confirmation: the kit's toast, a card with a success check. */
+
+.md-dialog {
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--av-radius-control);
+  box-shadow: var(--shadow-popover);
+}
+
+.md-dialog__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-content);
+  font-size: calc(var(--text-body-sm) * var(--av-rem));
+  font-weight: 500;
+}
+
+.md-dialog__inner::before {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+  background-color: var(--color-success);
+  mask-image: var(--md-admonition-icon--success);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Footer */
+
+.md-footer {
+  background-color: var(--color-canvas);
+  border-top: 1px solid var(--color-line);
+}
+
+/* Previous and next: the kit's quiet link, muted until hovered, instead of a fade. */
+
+.md-footer__link {
+  color: var(--color-content-muted);
+}
+
+.md-footer__link:is(:hover, :focus) {
+  opacity: 1;
+  color: var(--color-content);
+}
+
+.md-footer__direction {
+  color: var(--color-content-faint);
+}
+
+.md-footer__button {
+  border-radius: var(--av-radius-control);
+  transition: background-color var(--transition-duration-fast) var(--ease-standard);
+}
+
+.md-footer__link:is(:hover, :focus) .md-footer__button {
+  background-color: var(--color-control-hover);
+}
+
+.md-footer-meta {
+  background-color: var(--color-canvas);
+  border-top: 1px solid var(--color-line-subtle);
+}
+
+.md-copyright {
+  color: var(--color-content-muted);
+}
+
+.md-copyright__highlight {
+  color: var(--color-content-muted);
+}
+
+.md-footer-meta .md-copyright .av-made-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-content-faint);
+  text-decoration: none;
+}
+
+.md-footer-meta .md-copyright .av-made-by:hover {
+  color: var(--color-content);
+}
+
+.av-made-by .av-mark {
+  width: 0.7rem;
+  height: 0.7rem;
+  flex: none;
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

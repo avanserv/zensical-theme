@@ -1,0 +1,30 @@
+extends: material
+
+variant: modern
+# Spline Sans is self-hosted from assets/avanserv/brand; this keeps base.html off Google Fonts.
+font: false
+favicon: assets/avanserv/brand/favicon.svg
+
+# primary and accent are "custom" so Material's named palettes stay out of the way and
+# assets/avanserv/theme.css supplies every colour.
+palette:
+  - media: "(prefers-color-scheme)"
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/sun-moon
+      name: Switch to light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/sun
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/moon
+      name: Switch to system preference

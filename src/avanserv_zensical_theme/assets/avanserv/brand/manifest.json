@@ -1,0 +1,61 @@
+{
+  "brand": "v0.3.2",
+  "files": {
+    "assets/avanserv/brand/apple-touch-icon.png": {
+      "headed": false,
+      "sha256": "d1784a2dbad99e096489afe10f1058ebf4836d2651b2558054ceb7c3255f04a1",
+      "source": "dist/web/apple-touch-icon.png"
+    },
+    "assets/avanserv/brand/base.css": {
+      "headed": true,
+      "sha256": "2221733c239591651c3e1b56786801bc2199f37c4fc6af74036e76c74f0617d4",
+      "source": "dist/base.css"
+    },
+    "assets/avanserv/brand/favicon.ico": {
+      "headed": false,
+      "sha256": "5a86f7be5fa1e2acb433a2099bcb6120c61de7c9ab19ad99ccbf82075e25f3e0",
+      "source": "dist/web/favicon.ico"
+    },
+    "assets/avanserv/brand/favicon.svg": {
+      "headed": false,
+      "sha256": "9192f798e4c3c0ba62da2d91cbe075229a89095ba85ea493fb10578f509ae24a",
+      "source": "dist/web/favicon.svg"
+    },
+    "assets/avanserv/brand/fonts.css": {
+      "headed": true,
+      "sha256": "c7309678020edcc7695832da1a5d7c7d82aacfd385a221dcc28ac39813fecb8f",
+      "source": "dist/fonts.css"
+    },
+    "assets/avanserv/brand/fonts/OFL-spline-sans-mono.txt": {
+      "headed": false,
+      "sha256": "39cf945f55b87d0d47ae517fd072561cc288c45ef393384d0f8665dca08a941a",
+      "source": "fonts/OFL-spline-sans-mono.txt"
+    },
+    "assets/avanserv/brand/fonts/OFL.txt": {
+      "headed": false,
+      "sha256": "45b2aa0796f435bd620d864b6b44ff08855dc575524f23ffb43161e69cb5dbfc",
+      "source": "fonts/OFL.txt"
+    },
+    "assets/avanserv/brand/fonts/spline-sans-latin-ext.woff2": {
+      "headed": false,
+      "sha256": "2c2e7ddfe8d6b0b445d29f0f73a8fe8fe2893d5c561fbe98644eda47a9a20f7f",
+      "source": "dist/fonts/spline-sans-latin-ext.woff2"
+    },
+    "assets/avanserv/brand/fonts/spline-sans-latin.woff2": {
+      "headed": false,
+      "sha256": "64513365c2d82a4ba56470e830577247342ffbf54ed8dc8df011957db5d65a9e",
+      "source": "dist/fonts/spline-sans-latin.woff2"
+    },
+    "assets/avanserv/brand/fonts/spline-sans-mono-latin-ext.woff2": {
+      "headed": false,
+      "sha256": "0ca9a3989044d1f9b4da1f303cea3c3091f5cb02fe54da04fd51fceaf676ecf9",
+      "source": "dist/fonts/spline-sans-mono-latin-ext.woff2"
+    },
+    "assets/avanserv/brand/fonts/spline-sans-mono-latin.woff2": {
+      "headed": false,
+      "sha256": "46b7dcafe3e51dbe87be1bafaac3fed7646db1fe0a146647a6ffce3699f2752d",
+      "source": "dist/fonts/spline-sans-mono-latin.woff2"
+    }
+  },
+  "path": "M 175.11,621.16 C 175.11,621.16 196.08,642.13 211.06,672.14 C 226.04,702.16 253.37,771.65 286.07,786.48 C 318.78,801.31 475.61,801.44 522.18,771.74 C 568.75,742.04 637.27,621.34 677.63,531.3 C 718,441.26 747.59,351.26 767.02,270.01 C 786.45,188.76 795.73,116.26 796.24,75.38 C 796.56,50.04 793.51,36.85 789.18,28.29 C 784.55,19.12 777.13,11.7 767.98,7.08 C 759.41,2.75 746.23,-0.3 720.88,0.02 C 680.01,0.54 607.51,9.81 526.26,29.25 C 445.01,48.68 355.01,78.27 264.97,118.63 C 174.93,158.99 54.22,227.51 24.52,274.09 C -5.18,320.66 -5.04,477.49 9.79,510.19 C 24.61,542.9 94.1,570.22 124.12,585.21 C 154.14,600.19 175.11,621.16 175.11,621.16 Z"
+}

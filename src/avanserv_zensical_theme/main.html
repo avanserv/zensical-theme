@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/avanserv/brand/base.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/avanserv/tokens.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/avanserv/theme.css' | url }}">
+  <link rel="stylesheet" href="{{ 'assets/avanserv/syntax.css' | url }}">
+{% endblock %}
+
+{% block fonts %}
+  <link rel="preload" href="{{ 'assets/avanserv/brand/fonts/spline-sans-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ 'assets/avanserv/brand/fonts.css' | url }}">
+{% endblock %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link rel="icon" href="{{ 'assets/avanserv/brand/favicon.ico' | url }}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{{ 'assets/avanserv/brand/apple-touch-icon.png' | url }}">
+  {#- --color-canvas in each scheme, so mobile browser chrome matches the page. -#}
+  <meta name="theme-color" content="#eff4fc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#050e1a" media="(prefers-color-scheme: dark)">
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'assets/avanserv/search.js' | url }}"></script>
+{% endblock %}
