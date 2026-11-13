@@ -17,9 +17,9 @@ def test_vendored_files_match_the_brand_release():
 
 
 def test_marks_draw_the_brand_geometry():
-    for partial in ("av-mark.html", "av-mark-solid.html"):
-        html = (THEME / "partials" / partial).read_text()
-        assert re.search(r' d="([^"]+)"', html).group(1) == MANIFEST["path"], partial
+    html = (THEME / "partials" / "av-mark.html").read_text()
+    assert re.search(r' d="([^"]+)"', html).group(1) == MANIFEST["mark"]
+    assert "stroke" not in html
 
 
 def test_brand_version_is_pinned_consistently():

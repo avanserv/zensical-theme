@@ -1,29 +1,29 @@
 {
-  "brand": "v0.3.2",
+  "brand": "v0.4.1",
   "files": {
     "assets/avanserv/brand/apple-touch-icon.png": {
       "headed": false,
-      "sha256": "d1784a2dbad99e096489afe10f1058ebf4836d2651b2558054ceb7c3255f04a1",
+      "sha256": "1e9fee1ee481e0dd4fec07d0089bc50555342e3dd13caf34a6e2f81c1a4ea8a5",
       "source": "dist/web/apple-touch-icon.png"
     },
     "assets/avanserv/brand/base.css": {
       "headed": true,
-      "sha256": "2221733c239591651c3e1b56786801bc2199f37c4fc6af74036e76c74f0617d4",
+      "sha256": "e046aea7aa6d96a405a1180d4aafd78e7f4b5e59317d9b59c50481d65159d806",
       "source": "dist/base.css"
     },
     "assets/avanserv/brand/favicon.ico": {
       "headed": false,
-      "sha256": "5a86f7be5fa1e2acb433a2099bcb6120c61de7c9ab19ad99ccbf82075e25f3e0",
+      "sha256": "42e8c8e2bfd217faec2a6ad71f59c7e57731215f4a3530f2346c5f3ff478292b",
       "source": "dist/web/favicon.ico"
     },
     "assets/avanserv/brand/favicon.svg": {
       "headed": false,
-      "sha256": "9192f798e4c3c0ba62da2d91cbe075229a89095ba85ea493fb10578f509ae24a",
+      "sha256": "f26368df5bac1e1b7416111650767e519a251d3974e590ff982a1a5630553619",
       "source": "dist/web/favicon.svg"
     },
     "assets/avanserv/brand/fonts.css": {
       "headed": true,
-      "sha256": "c7309678020edcc7695832da1a5d7c7d82aacfd385a221dcc28ac39813fecb8f",
+      "sha256": "3008e9891789f9f12f78dbb1a84b026536631c4095446ea73b4231ffaf2fe7d0",
       "source": "dist/fonts.css"
     },
     "assets/avanserv/brand/fonts/OFL-spline-sans-mono.txt": {
@@ -57,5 +57,5 @@
       "source": "dist/fonts/spline-sans-mono-latin.woff2"
     }
   },
-  "path": "M 175.11,621.16 C 175.11,621.16 196.08,642.13 211.06,672.14 C 226.04,702.16 253.37,771.65 286.07,786.48 C 318.78,801.31 475.61,801.44 522.18,771.74 C 568.75,742.04 637.27,621.34 677.63,531.3 C 718,441.26 747.59,351.26 767.02,270.01 C 786.45,188.76 795.73,116.26 796.24,75.38 C 796.56,50.04 793.51,36.85 789.18,28.29 C 784.55,19.12 777.13,11.7 767.98,7.08 C 759.41,2.75 746.23,-0.3 720.88,0.02 C 680.01,0.54 607.51,9.81 526.26,29.25 C 445.01,48.68 355.01,78.27 264.97,118.63 C 174.93,158.99 54.22,227.51 24.52,274.09 C -5.18,320.66 -5.04,477.49 9.79,510.19 C 24.61,542.9 94.1,570.22 124.12,585.21 C 154.14,600.19 175.11,621.16 175.11,621.16 Z"
+  "mark": "M483 -241.5A241.5 241.5 0 0 0 0 -241.5A241.5 241.5 0 0 0 483 -241.5ZM352 -241.5A110.5 110.5 0 0 1 131 -241.5A110.5 110.5 0 0 1 352 -241.5ZM352 0L483 0L483 -445.18L352 -520.82ZM546 0L818.63 -157.41L818.63 -251.41L546 -408.81L546 -277.81L673.14 -204.41L546 -131Z"
 }

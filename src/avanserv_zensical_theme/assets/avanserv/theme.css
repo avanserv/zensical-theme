@@ -200,7 +200,8 @@ body {
 }
 
 .md-header__button.md-logo :is(img, svg) {
-  height: 1.3rem;
+  width: auto;
+  height: 1rem;
 }
 
 .md-header__title {
@@ -715,8 +716,8 @@ body {
 }
 
 .av-made-by .av-mark {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: auto;
+  height: 0.6rem;
   flex: none;
 }
 
