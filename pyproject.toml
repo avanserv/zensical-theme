@@ -1,6 +1,6 @@
 [project]
 name = "avanserv-zensical-theme"
-version = "0.1.0"
+version = "0.2.0"
 description = "The avanserv theme for Zensical documentation sites."
 readme = "README.md"
 license = "MIT"
